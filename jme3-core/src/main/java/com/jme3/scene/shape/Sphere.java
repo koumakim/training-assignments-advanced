@@ -41,6 +41,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.TempVars;
 import java.io.IOException;
 import java.nio.FloatBuffer;
@@ -147,13 +148,13 @@ public class Sphere extends Mesh {
         // allocate vertices
         vertCount = (zSamples - 2) * (radialSamples + 1) + 2;
 
-        FloatBuffer posBuf = BufferUtils.createVector3Buffer(vertCount);
+        FloatBuffer posBuf = FloatBufferUtils.createVector3Buffer(vertCount);
 
         // allocate normals if requested
-        FloatBuffer normBuf = BufferUtils.createVector3Buffer(vertCount);
+        FloatBuffer normBuf = FloatBufferUtils.createVector3Buffer(vertCount);
 
         // allocate texture coordinates
-        FloatBuffer texBuf = BufferUtils.createVector2Buffer(vertCount);
+        FloatBuffer texBuf = FloatBufferUtils.createVector2Buffer(vertCount);
 
         setBuffer(Type.Position, 3, posBuf);
         setBuffer(Type.Normal, 3, normBuf);
@@ -240,8 +241,8 @@ public class Sphere extends Mesh {
                 i++;
             }
 
-            BufferUtils.copyInternalVector3(posBuf, iSave, i);
-            BufferUtils.copyInternalVector3(normBuf, iSave, i);
+            FloatBufferUtils.copyInternalVector3(posBuf, iSave, i);
+            FloatBufferUtils.copyInternalVector3(normBuf, iSave, i);
 
             if (textureMode == TextureMode.Original) {
                 texBuf.put(1.0f).put(

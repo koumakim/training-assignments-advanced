@@ -44,6 +44,7 @@ import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.scene.mesh.IndexIntBuffer;
 import com.jme3.scene.mesh.IndexShortBuffer;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.IntMap;
 import java.io.File;
 import java.io.IOException;
@@ -461,16 +462,16 @@ public final class OBJLoader implements AssetLoader {
             }
         }
 
-        FloatBuffer posBuf  = BufferUtils.createFloatBuffer(vertIndexMap.size() * 3);
+        FloatBuffer posBuf  = FloatBufferUtils.createFloatBuffer(vertIndexMap.size() * 3);
         FloatBuffer normBuf = null;
         FloatBuffer tcBuf   = null;
 
         if (hasNormals){
-            normBuf = BufferUtils.createFloatBuffer(vertIndexMap.size() * 3);
+            normBuf = FloatBufferUtils.createFloatBuffer(vertIndexMap.size() * 3);
             m.setBuffer(VertexBuffer.Type.Normal, 3, normBuf);
         }
         if (hasTexCoord){
-            tcBuf = BufferUtils.createFloatBuffer(vertIndexMap.size() * 2);
+            tcBuf = FloatBufferUtils.createFloatBuffer(vertIndexMap.size() * 2);
             m.setBuffer(VertexBuffer.Type.TexCoord, 2, tcBuf);
         }
 

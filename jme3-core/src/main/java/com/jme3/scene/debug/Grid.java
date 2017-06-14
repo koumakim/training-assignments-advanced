@@ -32,9 +32,10 @@
 package com.jme3.scene.debug;
 
 import com.jme3.scene.Mesh;
-import com.jme3.scene.Mesh.Mode;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
+
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
@@ -56,7 +57,7 @@ public class Grid extends Mesh {
         yLines -= 2;
         int lineCount = xLines + yLines + 4;
 
-        FloatBuffer fpb = BufferUtils.createFloatBuffer(6 * lineCount);
+        FloatBuffer fpb = FloatBufferUtils.createFloatBuffer(6 * lineCount);
         ShortBuffer sib = BufferUtils.createShortBuffer(2 * lineCount);
 
         float xLineLen = (yLines + 1) * lineDist;

@@ -33,9 +33,7 @@ package com.jme3.environment.util;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
-import com.jme3.math.Vector4f;
+import com.jme3.math.*;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Quad;
@@ -45,13 +43,13 @@ import com.jme3.texture.Texture2D;
 import com.jme3.texture.TextureCubeMap;
 import com.jme3.texture.image.ColorSpace;
 import com.jme3.ui.Picture;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
+import com.jme3.util.TempVars;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+
 import static com.jme3.math.FastMath.*;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
-import com.jme3.util.TempVars;
 
 /**
  *
@@ -447,7 +445,7 @@ public class EnvMapUtils {
 
     /**
      * same as
-     * {@link EnvMapUtils#getSphericalHarmonicsCoefficents(com.jme3.texture.TextureCubeMap, com.jme3.utils.EnvMapUtils.FixSeamsMethod)}
+
      * the fix method used is {@link FixSeamsMethod#Wrap}
      *
      * @param cubeMap the environment cube map to compute SH for
@@ -575,7 +573,7 @@ public class EnvMapUtils {
     }
 
     /**
-     * {@link EnvMapUtils#generateIrradianceMap(com.jme3.math.Vector3f[], com.jme3.texture.TextureCubeMap, int, com.jme3.utils.EnvMapUtils.FixSeamsMethod)
+
      * }
      *
      * @param shCoeffs the spherical harmonics coefficients to use
@@ -608,7 +606,7 @@ public class EnvMapUtils {
         }
 
         for (int i = 0; i < 6; i++) {
-            ByteBuffer buf = BufferUtils.createByteBuffer(targetMapSize * targetMapSize * irrCubeMap.getImage().getFormat().getBitsPerPixel()/8);
+            ByteBuffer buf = ByteBufferUtils.createByteBuffer(targetMapSize * targetMapSize * irrCubeMap.getImage().getFormat().getBitsPerPixel()/8);
             irrCubeMap.getImage().setData(i, buf);
         }
 
@@ -872,7 +870,7 @@ public class EnvMapUtils {
                 bb.rewind();
                 bb.position(offset);
                 bb.get(dataArray, 0, dataSize);
-                ByteBuffer data = BufferUtils.createByteBuffer(dataArray);
+                ByteBuffer data = ByteBufferUtils.createByteBuffer(dataArray);
 
                 pics[i] = new Picture("bla");
                 Texture2D tex = new Texture2D(new Image(cubeMap.getImage().getFormat(), size, size, data, cubeMap.getImage().getColorSpace()));

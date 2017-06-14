@@ -35,7 +35,10 @@ import com.jme3.export.InputCapsule;
 import com.jme3.export.Savable;
 import com.jme3.export.SavableClassUtil;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.IntMap;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -1270,12 +1273,12 @@ final class BinaryInputCapsule implements InputCapsule {
             return null;
 
         if (BinaryImporter.canUseFastBuffers()){
-            ByteBuffer value = BufferUtils.createByteBuffer(length * 4);
+            ByteBuffer value = ByteBufferUtils.createByteBuffer(length * 4);
             value.put(content, index, length * 4).rewind();
             index += length * 4;
             return value.asFloatBuffer();
         }else{
-            FloatBuffer value = BufferUtils.createFloatBuffer(length);
+            FloatBuffer value = FloatBufferUtils.createFloatBuffer(length);
             for (int x = 0; x < length; x++) {
                 value.put(readFloatForBuffer(content));
             }
@@ -1292,7 +1295,7 @@ final class BinaryInputCapsule implements InputCapsule {
             return null;
 
         if (BinaryImporter.canUseFastBuffers()){
-            ByteBuffer value = BufferUtils.createByteBuffer(length * 4);
+            ByteBuffer value = ByteBufferUtils.createByteBuffer(length * 4);
             value.put(content, index, length * 4).rewind();
             index += length * 4;
             return value.asIntBuffer();
@@ -1314,12 +1317,12 @@ final class BinaryInputCapsule implements InputCapsule {
             return null;
 
         if (BinaryImporter.canUseFastBuffers()){
-            ByteBuffer value = BufferUtils.createByteBuffer(length);
+            ByteBuffer value = ByteBufferUtils.createByteBuffer(length);
             value.put(content, index, length).rewind();
             index += length;
             return value;
         }else{
-            ByteBuffer value = BufferUtils.createByteBuffer(length);
+            ByteBuffer value = ByteBufferUtils.createByteBuffer(length);
             for (int x = 0; x < length; x++) {
                 value.put(readByteForBuffer(content));
             }
@@ -1336,7 +1339,7 @@ final class BinaryInputCapsule implements InputCapsule {
             return null;
 
         if (BinaryImporter.canUseFastBuffers()){
-            ByteBuffer value = BufferUtils.createByteBuffer(length * 2);
+            ByteBuffer value = ByteBufferUtils.createByteBuffer(length * 2);
             value.put(content, index, length * 2).rewind();
             index += length * 2;
             return value.asShortBuffer();

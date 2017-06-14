@@ -39,8 +39,9 @@ import com.jme3.renderer.opengl.GLImageFormat;
 import com.jme3.renderer.opengl.GLImageFormats;
 import com.jme3.texture.Image;
 import com.jme3.texture.image.ColorSpace;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
 import com.jme3.util.LittleEndien;
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -261,7 +262,7 @@ public class KTXLoader implements AssetLoader {
     private Image createImage(int nbSlices, int byteBuffersSize, Image.Format imgFormat, int pixelWidth, int pixelHeight, int depth) {
         ArrayList<ByteBuffer> imageData = new ArrayList<ByteBuffer>(nbSlices);
         for (int i = 0; i < nbSlices; i++) {
-            imageData.add(BufferUtils.createByteBuffer(byteBuffersSize));
+            imageData.add(ByteBufferUtils.createByteBuffer(byteBuffersSize));
         }
         Image image = new Image(imgFormat, pixelWidth, pixelHeight, depth, imageData, ColorSpace.sRGB);
         return image;

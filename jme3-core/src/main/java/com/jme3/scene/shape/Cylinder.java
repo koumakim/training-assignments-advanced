@@ -41,10 +41,12 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.mesh.IndexBuffer;
-import com.jme3.util.BufferUtils;
-import static com.jme3.util.BufferUtils.*;
+import com.jme3.util.FloatBufferUtils;
+
 import java.io.IOException;
 import java.nio.FloatBuffer;
+
+import static com.jme3.util.BufferUtils.createShortBuffer;
 
 /**
  * A simple cylinder, defined by it's height and radius.
@@ -227,13 +229,13 @@ public class Cylinder extends Mesh {
         // Vertices
         int vertCount = axisSamples * (radialSamples + 1) + (closed ? 2 : 0);
 
-        setBuffer(Type.Position, 3, createVector3Buffer(getFloatBuffer(Type.Position), vertCount));
+        setBuffer(Type.Position, 3, FloatBufferUtils.createVector3Buffer(getFloatBuffer(Type.Position), vertCount));
 
         // Normals
-        setBuffer(Type.Normal, 3, createVector3Buffer(getFloatBuffer(Type.Normal), vertCount));
+        setBuffer(Type.Normal, 3, FloatBufferUtils.createVector3Buffer(getFloatBuffer(Type.Normal), vertCount));
 
         // Texture co-ordinates
-        setBuffer(Type.TexCoord, 2, createVector2Buffer(vertCount));
+        setBuffer(Type.TexCoord, 2, FloatBufferUtils.createVector2Buffer(vertCount));
 
         int triCount = ((closed ? 2 : 0) + 2 * (axisSamples - 1)) * radialSamples;
         
@@ -338,8 +340,8 @@ public class Cylinder extends Mesh {
                         .put(axisFractionTexture);
             }
 
-            BufferUtils.copyInternalVector3(pb, save, i);
-            BufferUtils.copyInternalVector3(nb, save, i);
+            FloatBufferUtils.copyInternalVector3(pb, save, i);
+            FloatBufferUtils.copyInternalVector3(nb, save, i);
 
             tb.put((inverted ? 0.0f : 1.0f))
                     .put(axisFractionTexture);

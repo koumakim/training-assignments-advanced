@@ -38,11 +38,13 @@ import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.texture.Texture2D;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.clone.Cloner;
+
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
-import java.util.LinkedList;
 import java.util.LinkedList;
 
 /**
@@ -179,17 +181,17 @@ class BitmapTextPage extends Geometry {
 
         // increase capacity of buffers as needed
         fpb.rewind();
-        fpb = BufferUtils.ensureLargeEnough(fpb, vertCount * 3);
+        fpb = FloatBufferUtils.ensureLargeEnough(fpb, vertCount * 3);
         fpb.limit(vertCount * 3);
         pb.updateData(fpb);
 
         ftb.rewind();
-        ftb = BufferUtils.ensureLargeEnough(ftb, vertCount * 2);
+        ftb = FloatBufferUtils.ensureLargeEnough(ftb, vertCount * 2);
         ftb.limit(vertCount * 2);
         tb.updateData(ftb);
 
         bcb.rewind();
-        bcb = BufferUtils.ensureLargeEnough(bcb, vertCount * 4);
+        bcb = ByteBufferUtils.ensureLargeEnough(bcb, vertCount * 4);
         bcb.limit(vertCount * 4);
         cb.updateData(bcb);
 

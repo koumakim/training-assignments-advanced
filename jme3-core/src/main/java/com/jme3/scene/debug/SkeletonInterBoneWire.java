@@ -31,9 +31,6 @@
  */
 package com.jme3.scene.debug;
 
-import java.nio.FloatBuffer;
-import java.util.Map;
-
 import com.jme3.animation.Bone;
 import com.jme3.animation.Skeleton;
 import com.jme3.math.Vector3f;
@@ -42,7 +39,10 @@ import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.VertexBuffer.Format;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.VertexBuffer.Usage;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
+
+import java.nio.FloatBuffer;
+import java.util.Map;
 
 /**
  * A class that displays a dotted line between a bone tail and its childrens' heads.
@@ -77,7 +77,7 @@ public class SkeletonInterBoneWire extends Mesh {
         this.boneLengths = boneLengths;
 
         VertexBuffer pb = new VertexBuffer(Type.Position);
-        FloatBuffer fpb = BufferUtils.createFloatBuffer(POINT_AMOUNT * connectionsAmount * 3);
+        FloatBuffer fpb = FloatBufferUtils.createFloatBuffer(POINT_AMOUNT * connectionsAmount * 3);
         pb.setupData(Usage.Stream, 3, Format.Float, fpb);
         this.setBuffer(pb);
 

@@ -41,7 +41,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.TempVars;
+
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -80,7 +82,6 @@ public class Dome extends Mesh {
      *            Influences how round the base of the dome is.
      * @param radius
      *            Radius of the dome.
-     * @see #Dome(com.jme.math.Vector3f, int, int, float)
      */
     public Dome(int planes, int radialSamples, float radius) {
         this(new Vector3f(0, 0, 0), planes, radialSamples, radius);
@@ -198,9 +199,9 @@ public class Dome extends Mesh {
         // allocate texture coordinates
 //        getTextureCoords().set(0, new TexCoords(createVector2Buffer(getVertexCount())));
 
-        FloatBuffer vb = BufferUtils.createVector3Buffer(vertCount);
-        FloatBuffer nb = BufferUtils.createVector3Buffer(vertCount);
-        FloatBuffer tb = BufferUtils.createVector2Buffer(vertCount);
+        FloatBuffer vb = FloatBufferUtils.createVector3Buffer(vertCount);
+        FloatBuffer nb = FloatBufferUtils.createVector3Buffer(vertCount);
+        FloatBuffer tb = FloatBufferUtils.createVector2Buffer(vertCount);
         setBuffer(Type.Position, 3, vb);
         setBuffer(Type.Normal, 3, nb);
         setBuffer(Type.TexCoord, 2, tb);
@@ -258,8 +259,8 @@ public class Dome extends Mesh {
 
                 tb.put(fRadialFraction).put(fYFraction);
             }
-            BufferUtils.copyInternalVector3(vb, iSave, i);
-            BufferUtils.copyInternalVector3(nb, iSave, i);
+            FloatBufferUtils.copyInternalVector3(vb, iSave, i);
+            FloatBufferUtils.copyInternalVector3(nb, iSave, i);
             tb.put(1.0f).put(fYFraction);
         }
 

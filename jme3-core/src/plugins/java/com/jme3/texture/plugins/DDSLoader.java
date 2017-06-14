@@ -38,8 +38,9 @@ import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import com.jme3.texture.Texture;
 import com.jme3.texture.image.ColorSpace;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
 import com.jme3.util.LittleEndien;
+
 import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
@@ -443,7 +444,7 @@ public class DDSLoader implements AssetLoader {
      * @throws java.io.IOException If an error occured while reading from InputStream
      */
     public ByteBuffer readGrayscale2D(boolean flip, int totalSize) throws IOException {
-        ByteBuffer buffer = BufferUtils.createByteBuffer(totalSize);
+        ByteBuffer buffer = ByteBufferUtils.createByteBuffer(totalSize);
 
         if (bpp == 8) {
             logger.finest("Source image format: R8");
@@ -494,7 +495,7 @@ public class DDSLoader implements AssetLoader {
         int sourcebytesPP = bpp / 8;
         int targetBytesPP = pixelFormat.getBitsPerPixel() / 8;
 
-        ByteBuffer dataBuffer = BufferUtils.createByteBuffer(totalSize);
+        ByteBuffer dataBuffer = ByteBufferUtils.createByteBuffer(totalSize);
 
         int mipWidth = width;
         int mipHeight = height;
@@ -546,7 +547,7 @@ public class DDSLoader implements AssetLoader {
     public ByteBuffer readDXT2D(boolean flip, int totalSize) throws IOException {
         logger.finest("Source image format: DXT");
 
-        ByteBuffer buffer = BufferUtils.createByteBuffer(totalSize);
+        ByteBuffer buffer = ByteBufferUtils.createByteBuffer(totalSize);
 
         int mipWidth = width;
         int mipHeight = height;
@@ -581,7 +582,7 @@ public class DDSLoader implements AssetLoader {
      * @throws java.io.IOException If an error occured while reading from InputStream
      */
     public ByteBuffer readGrayscale3D(boolean flip, int totalSize) throws IOException {
-        ByteBuffer buffer = BufferUtils.createByteBuffer(totalSize * depth);
+        ByteBuffer buffer = ByteBufferUtils.createByteBuffer(totalSize * depth);
 
         if (bpp == 8) {
             logger.finest("Source image format: R8");
@@ -635,7 +636,7 @@ public class DDSLoader implements AssetLoader {
         int sourcebytesPP = bpp / 8;
         int targetBytesPP = pixelFormat.getBitsPerPixel() / 8;
 
-        ByteBuffer dataBuffer = BufferUtils.createByteBuffer(totalSize * depth);
+        ByteBuffer dataBuffer = ByteBufferUtils.createByteBuffer(totalSize * depth);
 
         for (int k = 0; k < depth; k++) {
             //   ByteBuffer dataBuffer = BufferUtils.createByteBuffer(totalSize);
@@ -689,10 +690,10 @@ public class DDSLoader implements AssetLoader {
     public ByteBuffer readDXT3D(boolean flip, int totalSize) throws IOException {
         logger.finest("Source image format: DXT");
 
-        ByteBuffer bufferAll = BufferUtils.createByteBuffer(totalSize * depth);
+        ByteBuffer bufferAll = ByteBufferUtils.createByteBuffer(totalSize * depth);
 
         for (int i = 0; i < depth; i++) {
-            ByteBuffer buffer = BufferUtils.createByteBuffer(totalSize);
+            ByteBuffer buffer = ByteBufferUtils.createByteBuffer(totalSize);
             int mipWidth = width;
             int mipHeight = height;
             for (int mip = 0; mip < mipMapCount; mip++) {

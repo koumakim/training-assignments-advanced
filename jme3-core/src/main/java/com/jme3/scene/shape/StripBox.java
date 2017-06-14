@@ -35,6 +35,8 @@ package com.jme3.scene.shape;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
+
 import java.nio.FloatBuffer;
 
 /**
@@ -159,18 +161,18 @@ public class StripBox extends AbstractBox {
                 normals[i * 3 + 2] = norm.z;
             }
             
-            setBuffer(Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
+            setBuffer(Type.Normal, 3, FloatBufferUtils.createFloatBuffer(normals));
         }
     }
 
     protected void duUpdateGeometryTextures() {
         if (getBuffer(Type.TexCoord) == null){
-            setBuffer(Type.TexCoord, 2, BufferUtils.createFloatBuffer(GEOMETRY_TEXTURE_DATA));
+            setBuffer(Type.TexCoord, 2, FloatBufferUtils.createFloatBuffer(GEOMETRY_TEXTURE_DATA));
         }
     }
 
     protected void duUpdateGeometryVertices() {
-        FloatBuffer fpb = BufferUtils.createVector3Buffer(8 * 3);
+        FloatBuffer fpb = FloatBufferUtils.createVector3Buffer(8 * 3);
         Vector3f[] v = computeVertices();
         fpb.put(new float[] {
                 v[0].x, v[0].y, v[0].z, 

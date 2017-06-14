@@ -31,16 +31,18 @@
  */
 package com.jme3.environment.util;
 
-import com.jme3.asset.AssetManager;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.util.BufferUtils;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+ import com.jme3.asset.AssetManager;
+ import com.jme3.material.Material;
+ import com.jme3.math.ColorRGBA;
+ import com.jme3.math.FastMath;
+ import com.jme3.scene.Geometry;
+ import com.jme3.scene.Mesh;
+ import com.jme3.scene.VertexBuffer.Type;
+ import com.jme3.util.BufferUtils;
+ import com.jme3.util.FloatBufferUtils;
+
+ import java.nio.FloatBuffer;
+ import java.nio.ShortBuffer;
 
 /**
  * 
@@ -76,8 +78,8 @@ public class BoundingSphereDebug extends Mesh {
     private void setGeometryData() {
         setMode(Mode.Lines);
 
-        FloatBuffer posBuf = BufferUtils.createVector3Buffer((radialSamples + 1) * 3);
-        FloatBuffer colBuf = BufferUtils.createVector3Buffer((radialSamples + 1) * 4);
+        FloatBuffer posBuf = FloatBufferUtils.createVector3Buffer((radialSamples + 1) * 3);
+        FloatBuffer colBuf = FloatBufferUtils.createVector3Buffer((radialSamples + 1) * 4);
 
         setBuffer(Type.Position, 3, posBuf);
         setBuffer(Type.Color, 4, colBuf);

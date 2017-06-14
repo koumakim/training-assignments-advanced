@@ -36,29 +36,17 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.*;
-import com.jme3.scene.VertexBuffer.Format;
 import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.scene.VertexBuffer.Usage;
 import com.jme3.scene.mesh.IndexBuffer;
 
-import static com.jme3.util.BufferUtils.*;
-
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.nio.*;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.jme3.util.BufferUtils.*;
 
 /**
  * 
@@ -675,7 +663,7 @@ public class TangentBinormalGenerator {
             boolean approxTangent, boolean splitMirrored) {
         ArrayList<VertexInfo> vertexMap = linkVertices(mesh,splitMirrored);
 
-        FloatBuffer tangents = BufferUtils.createFloatBuffer(vertices.size() * 4);
+        FloatBuffer tangents = FloatBufferUtils.createFloatBuffer(vertices.size() * 4);
 
         ColorRGBA[] cols = null;
         if (debug) {
@@ -859,7 +847,7 @@ public class TangentBinormalGenerator {
     }    
     
     private static void writeColorBuffer(List<VertexData> vertices, ColorRGBA[] cols, Mesh mesh) {
-        FloatBuffer colors = BufferUtils.createFloatBuffer(vertices.size() * 4);
+        FloatBuffer colors = FloatBufferUtils.createFloatBuffer(vertices.size() * 4);
         colors.rewind();
         for (ColorRGBA color : cols) {
             colors.put(color.r);
@@ -901,8 +889,8 @@ public class TangentBinormalGenerator {
         Vector3f origin = new Vector3f();
         Vector3f point = new Vector3f();
         
-        FloatBuffer lineVertex = BufferUtils.createFloatBuffer(vertexBuffer.limit() * 2);
-        FloatBuffer lineColor = BufferUtils.createFloatBuffer(vertexBuffer.limit() / 3 * 4 * 2);
+        FloatBuffer lineVertex = FloatBufferUtils.createFloatBuffer(vertexBuffer.limit() * 2);
+        FloatBuffer lineColor = FloatBufferUtils.createFloatBuffer(vertexBuffer.limit() / 3 * 4 * 2);
         
         for (int i = 0; i < vertexBuffer.limit() / 3; i++) {
             populateFromBuffer(origin, vertexBuffer, i);
@@ -951,8 +939,8 @@ public class TangentBinormalGenerator {
         Vector3f normal = new Vector3f();
         
         IntBuffer lineIndex = BufferUtils.createIntBuffer(vertexBuffer.limit() / 3 * 6);
-        FloatBuffer lineVertex = BufferUtils.createFloatBuffer(vertexBuffer.limit() * 4);
-        FloatBuffer lineColor = BufferUtils.createFloatBuffer(vertexBuffer.limit() / 3 * 4 * 4);
+        FloatBuffer lineVertex = FloatBufferUtils.createFloatBuffer(vertexBuffer.limit() * 4);
+        FloatBuffer lineColor = FloatBufferUtils.createFloatBuffer(vertexBuffer.limit() / 3 * 4 * 4);
         
         boolean hasParity = mesh.getBuffer(Type.Tangent).getNumComponents() == 4;
         float tangentW = 1;

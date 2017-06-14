@@ -40,7 +40,9 @@ import com.jme3.export.JmeImporter;
 import com.jme3.math.*;
 import com.jme3.scene.Spatial;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
 import com.jme3.util.TempVars;
+
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Level;
@@ -185,7 +187,7 @@ public class BoundingSphere extends BoundingVolume {
         if (center == null) {
             center = new Vector3f();
         }
-        FloatBuffer buf = BufferUtils.createFloatBuffer(points.limit());
+        FloatBuffer buf = FloatBufferUtils.createFloatBuffer(points.limit());
         points.rewind();
         buf.put(points);
         buf.flip();

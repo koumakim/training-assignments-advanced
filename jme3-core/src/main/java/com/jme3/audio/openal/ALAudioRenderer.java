@@ -34,8 +34,7 @@ package com.jme3.audio.openal;
 import com.jme3.audio.*;
 import com.jme3.audio.AudioSource.Status;
 import com.jme3.math.Vector3f;
-import com.jme3.util.BufferUtils;
-import com.jme3.util.NativeObjectManager;
+import com.jme3.util.*;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -58,9 +57,9 @@ public class ALAudioRenderer implements AudioRenderer, Runnable {
     private static final int BUFFER_SIZE = 35280;
     private static final int STREAMING_BUFFER_COUNT = 5;
     private final static int MAX_NUM_CHANNELS = 64;
-    private IntBuffer ib = BufferUtils.createIntBuffer(1);
-    private final FloatBuffer fb = BufferUtils.createVector3Buffer(2);
-    private final ByteBuffer nativeBuf = BufferUtils.createByteBuffer(BUFFER_SIZE);
+    private IntBuffer ib = IntBufferUtils.createIntBuffer(1);
+    private final FloatBuffer fb = FloatBufferUtils.createVector3Buffer(2);
+    private final ByteBuffer nativeBuf = ByteBufferUtils.createByteBuffer(BUFFER_SIZE);
     private final byte[] arrayBuf = new byte[BUFFER_SIZE];
     private int[] channels;
     private AudioSource[] chanSrcs;

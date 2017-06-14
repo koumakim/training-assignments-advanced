@@ -33,13 +33,10 @@ package com.jme3.audio.plugins;
 
 import com.jme3.asset.AssetInfo;
 import com.jme3.asset.AssetLoader;
-import com.jme3.audio.AudioBuffer;
-import com.jme3.audio.AudioData;
-import com.jme3.audio.AudioKey;
-import com.jme3.audio.AudioStream;
-import com.jme3.audio.SeekableStream;
-import com.jme3.util.BufferUtils;
+import com.jme3.audio.*;
+import com.jme3.util.ByteBufferUtils;
 import com.jme3.util.LittleEndien;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -143,7 +140,7 @@ public class WAVLoader implements AssetLoader {
     }
 
     private void readDataChunkForBuffer(int len) throws IOException {
-        ByteBuffer data = BufferUtils.createByteBuffer(len);
+        ByteBuffer data = ByteBufferUtils.createByteBuffer(len);
         byte[] buf = new byte[512];
         int read = 0;
         while ( (read = in.read(buf)) > 0){

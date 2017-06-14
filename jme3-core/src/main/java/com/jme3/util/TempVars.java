@@ -32,11 +32,11 @@
 package com.jme3.util;
 
 import com.jme3.bounding.BoundingBox;
-import com.jme3.bounding.BoundingVolume;
 import com.jme3.collision.CollisionResults;
 import com.jme3.collision.bih.BIHNode.BIHStackData;
 import com.jme3.math.*;
 import com.jme3.scene.Spatial;
+
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public class TempVars {
      */
     public final IntBuffer intBuffer1 = BufferUtils.createIntBuffer(1);
     public final IntBuffer intBuffer16 = BufferUtils.createIntBuffer(16);
-    public final FloatBuffer floatBuffer16 = BufferUtils.createFloatBuffer(16);
+    public final FloatBuffer floatBuffer16 = FloatBufferUtils.createFloatBuffer(16);
     /**
      * BoundingVolumes (for shadows etc.)
      */

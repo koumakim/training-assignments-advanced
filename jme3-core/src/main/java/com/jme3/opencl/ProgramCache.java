@@ -32,7 +32,8 @@
 package com.jme3.opencl;
 
 import com.jme3.system.JmeSystem;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.ByteBufferUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -140,7 +141,7 @@ public class ProgramCache {
         ByteBuffer bb;
         try {
             byte[] bytes = Files.readAllBytes(file.toPath());
-            bb = BufferUtils.createByteBuffer(bytes);
+            bb = ByteBufferUtils.createByteBuffer(bytes);
         } catch (IOException ex) {
             LOG.log(Level.FINE, "Unable to read cache file", ex);
             return null;

@@ -31,38 +31,13 @@
  */
 package com.jme3.renderer.opengl;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.jme3.material.RenderState;
 import com.jme3.material.RenderState.BlendFunc;
 import com.jme3.material.RenderState.StencilOperation;
 import com.jme3.material.RenderState.TestFunction;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import com.jme3.math.Vector4f;
+import com.jme3.math.*;
 import com.jme3.opencl.OpenCLObjectManager;
-import com.jme3.renderer.Caps;
-import com.jme3.renderer.IDList;
-import com.jme3.renderer.Limits;
-import com.jme3.renderer.RenderContext;
-import com.jme3.renderer.Renderer;
-import com.jme3.renderer.RendererException;
-import com.jme3.renderer.Statistics;
+import com.jme3.renderer.*;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Mesh.Mode;
 import com.jme3.scene.VertexBuffer;
@@ -81,10 +56,17 @@ import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.ShadowCompareMode;
 import com.jme3.texture.Texture.WrapAxis;
 import com.jme3.texture.image.LastTextureState;
-import com.jme3.util.BufferUtils;
-import com.jme3.util.ListMap;
-import com.jme3.util.MipMapGenerator;
-import com.jme3.util.NativeObjectManager;
+import com.jme3.util.*;
+
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class GLRenderer implements Renderer {
 
@@ -92,11 +74,11 @@ public final class GLRenderer implements Renderer {
     private static final boolean VALIDATE_SHADER = false;
     private static final Pattern GLVERSION_PATTERN = Pattern.compile(".*?(\\d+)\\.(\\d+).*");
 
-    private final ByteBuffer nameBuf = BufferUtils.createByteBuffer(250);
+    private final ByteBuffer nameBuf = ByteBufferUtils.createByteBuffer(250);
     private final StringBuilder stringBuf = new StringBuilder(250);
     private final IntBuffer intBuf1 = BufferUtils.createIntBuffer(1);
     private final IntBuffer intBuf16 = BufferUtils.createIntBuffer(16);
-    private final FloatBuffer floatBuf16 = BufferUtils.createFloatBuffer(16);
+    private final FloatBuffer floatBuf16 = FloatBufferUtils.createFloatBuffer(16);
     private final RenderContext context = new RenderContext();
     private final NativeObjectManager objManager = new NativeObjectManager();
     private final EnumSet<Caps> caps = EnumSet.noneOf(Caps.class);
@@ -1659,7 +1641,7 @@ public final class GLRenderer implements Renderer {
         setFrameBuffer(fb);
 
         Vector2f[] samplePositions = new Vector2f[fb.getSamples()];
-        FloatBuffer samplePos = BufferUtils.createFloatBuffer(2);
+        FloatBuffer samplePos = FloatBufferUtils.createFloatBuffer(2);
         for (int i = 0; i < samplePositions.length; i++) {
             glext.glGetMultisample(GLExt.GL_SAMPLE_POSITION, i, samplePos);
             samplePos.clear();
