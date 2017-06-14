@@ -40,6 +40,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
+import com.jme3.util.FloatBufferUtils;
+
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -162,8 +164,8 @@ public class Torus extends Mesh {
                 i++;
             }
 
-            BufferUtils.copyInternalVector3(fpb, iSave, i);
-            BufferUtils.copyInternalVector3(fnb, iSave, i);
+            FloatBufferUtils.copyInternalVector3(fpb, iSave, i);
+            FloatBufferUtils.copyInternalVector3(fnb, iSave, i);
 
             ftb.put(1.0f).put(circleFraction);
 
@@ -172,9 +174,9 @@ public class Torus extends Mesh {
 
         // duplicate the cylinder ends to form a torus
         for (int iR = 0; iR <= radialSamples; iR++, i++) {
-            BufferUtils.copyInternalVector3(fpb, iR, i);
-            BufferUtils.copyInternalVector3(fnb, iR, i);
-            BufferUtils.copyInternalVector2(ftb, iR, i);
+            FloatBufferUtils.copyInternalVector3(fpb, iR, i);
+            FloatBufferUtils.copyInternalVector3(fnb, iR, i);
+            FloatBufferUtils.copyInternalVector2(ftb, iR, i);
             ftb.put(i * 2 + 1, 1.0f);
         }
     }
